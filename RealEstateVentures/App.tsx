@@ -6,12 +6,31 @@ import {HomeScreen} from './src/pages/Home';
 import {ContactUs} from './src/pages/ContactUs';
 import {Marketplace} from './src/pages/Marketplace';
 import {SignIn} from './src/pages/SignIn';
+import {SignUp} from './src/pages/SignUp'; // Make sure to import your SignUp screen
 import {ListingDetail} from './src/pages/ListingDetail';
 import {store} from './src/redux/store';
 import {Provider} from 'react-redux';
 
 const Tab = createBottomTabNavigator();
+const AuthStack = createNativeStackNavigator();
 const MarketplaceStack = createNativeStackNavigator();
+
+function AuthStackNavigator() {
+  return (
+    <AuthStack.Navigator>
+      <AuthStack.Screen
+        name="SignIn"
+        component={SignIn}
+        options={{headerShown: false}}
+      />
+      <AuthStack.Screen
+        name="SignUp"
+        component={SignUp}
+        // options={{title: 'Sign Up'}} // You can customize the title as needed
+      />
+    </AuthStack.Navigator>
+  );
+}
 
 function MarketplaceStackNavigator() {
   return (
@@ -47,7 +66,7 @@ export default function App() {
             component={MarketplaceStackNavigator}
           />
           <Tab.Screen name="ContactUs" component={ContactUs} />
-          <Tab.Screen name="SignIn" component={SignIn} />
+          <Tab.Screen name="Login" component={AuthStackNavigator} />
         </Tab.Navigator>
       </NavigationContainer>
     </Provider>
